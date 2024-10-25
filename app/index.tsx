@@ -6,6 +6,7 @@ export default function Index() {
         <View style={styles.container}>
             <Text>Edit app/index.tsx to edit this screen.</Text>
             <Link href="/name" style={styles.link}>Ir para nome</Link>
+            <Link href="/swiper" style={styles.link}>Ir swiper</Link>
         </View>
     );
 }
