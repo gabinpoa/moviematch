@@ -1,12 +1,20 @@
+import "@/global.css";
+import { UserProvider } from "@/context/User";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
+
+const queryClient = new QueryClient()
 
 export default function RootLayout() {
     return (
-        <Stack>
-            <Stack.Screen name="index" />
-            <Stack.Screen name="name" />
-            <Stack.Screen name="swiper" />
-        </Stack>
+        <QueryClientProvider client={queryClient}>
+            <UserProvider>
+                <Stack>
+                    <Stack.Screen name="login" />
+                    <Stack.Screen name="register" />
+                </Stack>
+            </UserProvider>
+        </QueryClientProvider>
     );
 }
 

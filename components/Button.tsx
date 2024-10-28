@@ -2,17 +2,17 @@ import { FC, ReactNode } from 'react'
 import { Pressable, StyleSheet } from 'react-native'
 
 type Props = {
-    action: () => void,
+    onPress: () => void,
     children: ReactNode
 }
 
-const SwipeButton: FC<Props> = ({ action, children }) => {
+const StyledButton: FC<Props> = ({ onPress, children }) => {
     return (
-        <Pressable onPress={action} style={styles.button}>{children}</Pressable>
+        <Pressable onPress={onPress} style={styles.button}>{children}</Pressable>
     )
 }
 
-export default SwipeButton
+export default StyledButton
 
 const styles = StyleSheet.create({
     button: {
