@@ -7,10 +7,9 @@ type Props = {
 
 export default function Title({ children, size = 'normal' }: Props) {
     return (
-        <Text style={{
-            fontSize: size == 'normal' ? 14 : 16,
-            fontWeight: 'semibold',
-        }}>{children}</Text>
+        <Text
+            className={`font-semibold text-neutral-600 ${size === 'normal' ? 'text-base' : 'text-lg'}`}
+        >{children}</Text>
     );
 }
 

@@ -36,7 +36,7 @@ export default function Login() {
         if (initializing) return;
 
         if (user) {
-            router.replace('/(app)');
+            router.replace('/(app)/(tabs)');
         }
     }, [user, initializing]);
 

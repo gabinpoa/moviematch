@@ -1,12 +1,22 @@
 import { useUser } from '@/context/User'
-import { Redirect, Stack } from 'expo-router';
+import { Redirect, Slot, Stack } from 'expo-router';
+import { ActivityIndicator } from 'react-native';
 
 export default function AppLayout() {
-    const user = useUser();
+    const { user, initializing } = useUser();
+
+    if (initializing) {
+        return <ActivityIndicator />
+    }
 
     if (!user) {
         return <Redirect href="/login" />
     }
 
-    return <Stack />
+    return (
+        <Stack>
+            <Stack.Screen options={{ headerShown: false }} name="(tabs)" />
+            <Stack.Screen options={{ headerShown: true }} name='match/[id]' />
+        </Stack>
+    )
 }

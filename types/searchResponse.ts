@@ -28,11 +28,20 @@ const responseExample = {
     "total_results": 39
 }
 
-export type ResponseResult = Omit<typeof responseResultExample, 'backdrop_path' | 'poster_path'> & {
+export type SearchResponseResult = Omit<typeof responseResultExample, 'backdrop_path' | 'poster_path'> & {
     backdrop_path: string | null
     poster_path: string | null
 }
 
-export type Response = Omit<typeof responseExample, 'results'> & {
-    results: ResponseResult[]
+export type SearchResponse = Omit<typeof responseExample, 'results'> & {
+    results: SearchResponseResult[]
 }
+
+export interface TrendingResponseResult extends SearchResponseResult {
+    media_type: string
+}
+
+export type TrendingResponse = Omit<typeof responseExample, 'results'> & {
+    results: TrendingResponseResult[]
+}
+
