@@ -1,5 +1,5 @@
 import { auth, db } from "@/firebaseConfig";
-import { DocumentData, addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore/lite";
+import { DocumentData, addDoc, collection, doc, getDoc, getDocs, query, setDoc, where } from "firebase/firestore/lite";
 
 export interface SharedListData extends DocumentData {
     title: string,
@@ -76,14 +76,13 @@ export type MovieMatchData = {
     }[]
 }
 
-
-export async function addMovieToMatch(matchId: string, movieData: MovieMatchData) {
+export async function addMovieToMatch(matchId: string, movieId: string, movieData: MovieMatchData) {
     if (!auth.currentUser) {
         throw "Cannot add movie to list because is not authenticated"
     }
 
     const listDocRef = doc(db, 'shared_lists', matchId)
     const movieCollRef = collection(listDocRef, 'movies')
-
-    await addDoc(movieCollRef, movieData)
+    const movieDocRef = doc(movieCollRef, movieId)
+    await setDoc(movieDocRef, movieData)
 }

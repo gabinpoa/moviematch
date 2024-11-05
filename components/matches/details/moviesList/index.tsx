@@ -6,12 +6,12 @@ import MovieItem from './Item'
 type Props = {
     movies: MovieMatchData[]
 }
-export default function MoviesList({movies}: Props) {
-  return (
-    <ScrollView>
-        {movies.map((movie, i) => (
-            <MovieItem uniqueIdentifier={i} movie={movie} />
-        ))}
-    </ScrollView>
-  )
+export default function MoviesList({ movies }: Props) {
+    return (
+        <ScrollView>
+            {movies.map((movie, i) => (
+                <MovieItem key={i} movie={movie} />
+            ))}
+        </ScrollView>
+    )
 }

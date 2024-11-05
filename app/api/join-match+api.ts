@@ -1,5 +1,5 @@
 import { db } from "@/firebaseConfig"
-import { SharedListData as MatchData } from "@/functions/matches"
+import { MatchData as MatchData } from "@/functions/matches"
 import { doc, runTransaction } from "firebase/firestore/lite"
 
 export type ExpectedData = {

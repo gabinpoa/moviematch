@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from 'react-native'
+import { Text } from 'react-native'
 import { useLocalSearchParams, useNavigation } from 'expo-router'
 import { useQuery } from '@tanstack/react-query'
 import { getMatch } from '@/functions/matches'

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import useDebounce from '@/hooks/useDebounce'
 import { useQuery } from '@tanstack/react-query'
 import { getSearchResults, getTrending } from '@/functions/tmdb'
@@ -6,18 +6,24 @@ import { ActivityIndicator, ScrollView, Text, View } from 'react-native'
 import MovieSearchItem from './Item'
 import { useQueryFocusAware } from '@/hooks/useQueryFocusAware'
 import { useNavigation } from 'expo-router'
+import { SearchResponseResult } from '@/types/searchResponse'
 
-export default function SearchSection() {
+type Props = {
+    onSelect: (movie: SearchResponseResult) => any
+    title: string
+}
+
+export default function SearchSection({ onSelect, title }: Props) {
     const [searchStr, setSearchStr] = useState('')
     const [showTrending, setShowTrending] = useState(true)
     const debouncedSearch = useDebounce(searchStr, 600, (str) => str.length > 3)
     const isFocused = useQueryFocusAware()
 
     const navigation = useNavigation()
-    useEffect(() => {
+    useLayoutEffect(() => {
         navigation.setOptions({
             headerLargeTitle: true,
-            title: 'Search movies',
+            title,
             headerSearchBarOptions: {
                 placeholder: "Movie name",
                 onChangeText: (event: any) => {
@@ -25,7 +31,7 @@ export default function SearchSection() {
                 },
             },
         })
-    }, [navigation])
+    }, [])
 
     useEffect(() => {
         if (showTrending && debouncedSearch.length > 0) {
@@ -63,10 +69,9 @@ export default function SearchSection() {
                 {
                     data?.map((item, i) => (
                         <MovieSearchItem
+                            onSelect={onSelect}
                             key={i}
-                            img={item.poster_path}
-                            title={item.title}
-                            year={item.release_date}
+                            movie={item}
                         />
                     ))
                 }

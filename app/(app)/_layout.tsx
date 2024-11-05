@@ -1,5 +1,5 @@
 import { useUser } from '@/context/User'
-import { Redirect, Slot, Stack } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
 import { ActivityIndicator } from 'react-native';
 
 export default function AppLayout() {
@@ -17,6 +17,7 @@ export default function AppLayout() {
         <Stack>
             <Stack.Screen options={{ headerShown: false }} name="(tabs)" />
             <Stack.Screen options={{ headerShown: true }} name='match/[id]' />
+            <Stack.Screen options={{ headerShown: true }} name='match/add-movie/[id]' />
         </Stack>
     )
 }
